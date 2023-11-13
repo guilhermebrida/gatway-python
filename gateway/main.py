@@ -22,7 +22,7 @@ connection = psycopg2.connect(
 cursor = connection.cursor()
 
 def insertMessage(msg):
-    cursor.execute("INSERT INTO messages (message) VALUES (%s)", (msg,))
+    cursor.execute("INSERT INTO iridium (received_message) VALUES (%s)", (msg,))
     connection.commit()
 
 
@@ -35,8 +35,8 @@ def receiveMessage():
             print("== main()")
             response,addr = sock.recvfrom(1024)
             if response:
-                print(" response: ", response)
-                insertMessage(response)
+                print(" response: ", response.decode())
+                insertMessage(response.decode())
             time.sleep(2)
     except KeyboardInterrupt:
         print("CRLT + C")            
