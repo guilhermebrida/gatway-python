@@ -43,6 +43,7 @@ def receiveMessage():
 
 
 def main():
+    print("start main()")
     Thread(target=receiveMessage).start()
 
 if __name__ == "__main__":
@@ -51,5 +52,6 @@ if __name__ == "__main__":
         porta = 10116
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.bind((host, porta))
+        main()
     except KeyboardInterrupt:
         print("Finalizando")
