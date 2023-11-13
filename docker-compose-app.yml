@@ -11,14 +11,9 @@ services:
     environment:
       - ENDPOINT=postgres
     external_links:
-      - envio-firmware-postgres-1
+      - postgres:postgres
     networks:
       - app-network
-
-# networks: 
-#   app-network:
-#     external: 
-#      name: backing-services
 
 networks: 
   app-network:
