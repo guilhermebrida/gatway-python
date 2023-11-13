@@ -11,4 +11,4 @@ COPY . .
 RUN python -m venv venv
 RUN /bin/bash -c "source venv/bin/activate"
 
-CMD ["python", "main.py"]
+CMD ["python", "gateway/main.py"]
