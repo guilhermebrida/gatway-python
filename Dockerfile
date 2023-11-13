@@ -1,32 +1,14 @@
-FROM python:3.9-slim-buster
+FROM python:3.9
 
-RUN apt-get update && apt-get install -y libpq-dev python3-tk && rm -rf /var/lib/apt/lists/* 
+WORKDIR /app
 
-ENV APP_HOME /app
-WORKDIR $APP_HOME
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN pip install poetry
+RUN python -m venv venv
+RUN /bin/bash -c "source venv/bin/activate"
 
-RUN poetry install --no-root --no-dev
-
-ENV POSTGRES_HOST=postgres
-ENV POSTGRES_PORT=5432
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=postgres
-ENV POSTGRES_DB=postgres
-
-CMD ["poetry", "run", "python", "-u", "./app/FOTA.py"]
-# CMD ["python", "-u","./app/FOTA.py"]
-
-
-
-
-
-
-
-
-
-
-
+CMD ["python", "main.py"]
