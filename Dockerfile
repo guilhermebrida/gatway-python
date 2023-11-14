@@ -4,12 +4,11 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
 
 RUN python -m venv venv
 RUN /bin/bash -c "source venv/bin/activate"
+RUN pip install --no-cache-dir -r requirements.txt
 
 ENV POSTGRES_HOST=postgres
 ENV POSTGRES_PORT=5432
