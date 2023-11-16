@@ -34,6 +34,10 @@ def insertMessage(msg):
 
 def receiveMessage():
     print((host, porta))
+    logging.debug("Esta é uma mensagem de depuração")
+    logging.warning("Esta é uma mensagem de aviso")
+    logging.error("Esta é uma mensagem de erro")
+    logging.critical("Esta é uma mensagem crítica")
     try :
         while True:
             logging.info("===================================================================================")
