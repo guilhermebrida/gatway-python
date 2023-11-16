@@ -36,18 +36,14 @@ def insertMessage(msg):
 
 def receiveMessage():
     print((host, porta))
-    logging.debug("Esta é uma mensagem de depuração")
-    logging.warning("Esta é uma mensagem de aviso")
-    logging.error("Esta é uma mensagem de erro")
-    logging.critical("Esta é uma mensagem crítica")
     try :
         while True:
-            logging.warning("===================================================================================")
-            logging.warning("== main()")
+            logging.info(" ===================================================================================")
+            logging.info(" == main()")
             response,addr = sock.recvfrom(1024)
             if response:
                 # print(" response: ", response.decode())
-                logging.warning(" response: " + response.decode())
+                logging.info(" response: " + response.decode())
                 insertMessage(response.decode())
             time.sleep(2)
     except KeyboardInterrupt:
@@ -55,7 +51,7 @@ def receiveMessage():
 
 
 def main():
-    logging.info("start main()")
+    logging.info(" start main()")
     Thread(target=receiveMessage).start()
 
 if __name__ == "__main__":
