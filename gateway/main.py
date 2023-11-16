@@ -5,6 +5,8 @@ import psycopg2
 import os
 import logging
 
+logging.basicConfig(level=logging.INFO)
+
 postgres_host = os.environ['POSTGRES_HOST']
 postgres_port = os.environ['POSTGRES_PORT']
 postgres_user = os.environ['POSTGRES_USER']
@@ -40,12 +42,12 @@ def receiveMessage():
     logging.critical("Esta é uma mensagem crítica")
     try :
         while True:
-            logging.info("===================================================================================")
-            logging.info("== main()")
+            logging.warning("===================================================================================")
+            logging.warning("== main()")
             response,addr = sock.recvfrom(1024)
             if response:
                 # print(" response: ", response.decode())
-                logging.info(" response: " + response.decode())
+                logging.warning(" response: " + response.decode())
                 insertMessage(response.decode())
             time.sleep(2)
     except KeyboardInterrupt:
