@@ -1,5 +1,9 @@
 import socket
 import threading
+import os
+import psycopg2
+import logging
+
 
 #Variables for holding information about connections
 connections = []
@@ -16,6 +20,22 @@ class Client(threading.Thread):
         self.id = id
         self.name = name
         self.signal = signal
+        postgres_host = "localhost"
+        postgres_port = os.environ['POSTGRES_PORT']
+        postgres_user = os.environ['POSTGRES_USER']
+        postgres_password = os.environ['POSTGRES_PASSWORD']
+        postgres_db = os.environ['POSTGRES_DB']
+
+        self.connection = psycopg2.connect(
+            host=postgres_host,
+            # host="postgres",
+            port=postgres_port,
+            user=postgres_user,
+            password=postgres_password,
+            dbname=postgres_db
+        )
+
+        self.cursor = self.connection.cursor()
     
     def __str__(self):
         return str(self.id) + " " + str(self.address)
@@ -36,10 +56,20 @@ class Client(threading.Thread):
                 break
             if data != "":
                 print("ID " + str(self.id) + ": " + str(data.decode("utf-8")))
+                self.insertMessage(data.decode("utf-8"))
                 for client in connections:
                     if client.id != self.id:
                         client.socket.sendall(data)
+                
 
+
+    def insertMessage(self,msg):
+        try:
+            self.cursor.execute(f"INSERT INTO public.iridium (received_message) VALUES ('{msg}')")
+            self.connection.commit()
+        except Exception as e:
+            logging.error("Erro ao inserir mensagem no banco de dados")
+            logging.error(e)
 # #Wait for new connections
 # def newConnections(socket):
 #     while True:

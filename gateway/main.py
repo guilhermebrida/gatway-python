@@ -12,30 +12,30 @@ connections = []
 total_connections = 0
 
 # postgres_host = os.environ['POSTGRES_HOST']
-postgres_host = "localhost"
-postgres_port = os.environ['POSTGRES_PORT']
-postgres_user = os.environ['POSTGRES_USER']
-postgres_password = os.environ['POSTGRES_PASSWORD']
-postgres_db = os.environ['POSTGRES_DB']
+# postgres_host = "localhost"
+# postgres_port = os.environ['POSTGRES_PORT']
+# postgres_user = os.environ['POSTGRES_USER']
+# postgres_password = os.environ['POSTGRES_PASSWORD']
+# postgres_db = os.environ['POSTGRES_DB']
 
-connection = psycopg2.connect(
-    host=postgres_host,
-    # host="postgres",
-    port=postgres_port,
-    user=postgres_user,
-    password=postgres_password,
-    dbname=postgres_db
-)
+# connection = psycopg2.connect(
+#     host=postgres_host,
+#     # host="postgres",
+#     port=postgres_port,
+#     user=postgres_user,
+#     password=postgres_password,
+#     dbname=postgres_db
+# )
 
-cursor = connection.cursor()
+# cursor = connection.cursor()
 
-def insertMessage(msg):
-    try:
-        cursor.execute(f"INSERT INTO public.iridium (received_message) VALUES ('{msg}')")
-        connection.commit()
-    except Exception as e:
-        logging.error("Erro ao inserir mensagem no banco de dados")
-        logging.error(e)
+# def insertMessage(msg):
+#     try:
+#         cursor.execute(f"INSERT INTO public.iridium (received_message) VALUES ('{msg}')")
+#         connection.commit()
+#     except Exception as e:
+#         logging.error("Erro ao inserir mensagem no banco de dados")
+#         logging.error(e)
 
 
 
@@ -58,7 +58,7 @@ def receiveMessage():
                     if response:
                         # print(" response: ", response.decode())
                         logging.info(" response: " + response.decode())
-                        insertMessage(response.decode())
+                        # insertMessage(response.decode())
                     time.sleep(2)
     except KeyboardInterrupt:
         logging.error("CRLT + C")            
