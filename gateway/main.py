@@ -64,8 +64,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        # host = '0.0.0.0'
-        host = '18.229.150.174'
+        host = '0.0.0.0'
         porta = 10116
         # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
