@@ -52,7 +52,11 @@ class Client(threading.Thread):
             except:
                 print("Client " + str(self.address) + " has disconnected")
                 self.signal = False
-                connections.remove(self)
+                try:
+                    connections.remove(self)
+                except Exception as e:
+                    logging.error("Erro ao remover conexão da lista de conexões")
+                    logging.error(e)
                 break
             if data != "":
                 print("ID " + str(self.id) + ": " + str(data.decode("utf-8")))
