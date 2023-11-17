@@ -36,6 +36,7 @@ def insertMessage(msg):
 
 def receiveMessage():
     print((host, porta))
+    print(f"Conexão estabelecida com {endereco_cliente}")
     try :
         while True:
             logging.info(" ===================================================================================")
@@ -58,8 +59,11 @@ if __name__ == "__main__":
     try:
         host = '0.0.0.0'
         porta = 10116
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
         sock.bind((host, porta))
+        sock.listen()
+        conexao, endereco_cliente = sock.accept()
         main()
     except KeyboardInterrupt:
         logging.error("Finalizando")
