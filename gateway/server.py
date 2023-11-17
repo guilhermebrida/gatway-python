@@ -40,28 +40,28 @@ class Client(threading.Thread):
                     if client.id != self.id:
                         client.socket.sendall(data)
 
-#Wait for new connections
-def newConnections(socket):
-    while True:
-        sock, address = socket.accept()
-        global total_connections
-        connections.append(Client(sock, address, total_connections, "Name", True))
-        connections[len(connections) - 1].start()
-        print("New connection at ID " + str(connections[len(connections) - 1]))
-        total_connections += 1
+# #Wait for new connections
+# def newConnections(socket):
+#     while True:
+#         sock, address = socket.accept()
+#         global total_connections
+#         connections.append(Client(sock, address, total_connections, "Name", True))
+#         connections[len(connections) - 1].start()
+#         print("New connection at ID " + str(connections[len(connections) - 1]))
+#         total_connections += 1
 
-def main():
-    #Get host and port
-    host = input("Host: ")
-    port = int(input("Port: "))
+# def main():
+#     #Get host and port
+#     host = "0.0.0.0"
+#     port = 10116
 
-    #Create new server socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind((host, port))
-    sock.listen(5)
+#     #Create new server socket
+#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     sock.bind((host, port))
+#     sock.listen(5)
 
-    #Create new thread to wait for connections
-    newConnectionsThread = threading.Thread(target = newConnections, args = (sock,))
-    newConnectionsThread.start()
+#     #Create new thread to wait for connections
+#     newConnectionsThread = threading.Thread(target = newConnections, args = (sock,))
+#     newConnectionsThread.start()
     
-main()
+# main()

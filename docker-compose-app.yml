@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "10116:10116/udp"
+      - "10116:10116/tcp"
     environment:
       - ENDPOINT=postgres
     external_links:
