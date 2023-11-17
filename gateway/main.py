@@ -11,7 +11,8 @@ logging.basicConfig(level=logging.INFO)
 connections = []
 total_connections = 0
 
-postgres_host = os.environ['POSTGRES_HOST']
+# postgres_host = os.environ['POSTGRES_HOST']
+postgres_host = "localhost"
 postgres_port = os.environ['POSTGRES_PORT']
 postgres_user = os.environ['POSTGRES_USER']
 postgres_password = os.environ['POSTGRES_PASSWORD']
