@@ -86,6 +86,8 @@ if __name__ == "__main__":
     try:
         host = '0.0.0.0'
         port = 10116
+        connections = []
+        total_connections = 0
         # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
         main()
     except KeyboardInterrupt:
