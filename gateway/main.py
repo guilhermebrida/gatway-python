@@ -39,6 +39,7 @@ def receiveMessage():
     # print(f"Conexão estabelecida com {endereco_cliente}")
     try :
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(10)
             s.bind((host, porta))
             s.listen()
             print(f"Aguardando conexões em {host}:{porta}...")
@@ -67,7 +68,7 @@ if __name__ == "__main__":
         host = '0.0.0.0'
         porta = 10116
         # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+        # sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         main()
     except KeyboardInterrupt:
         logging.error("Finalizando")
